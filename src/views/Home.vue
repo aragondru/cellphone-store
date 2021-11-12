@@ -1,15 +1,15 @@
 <template>
-  <hello-world />
+  <listar />
 </template>
 
 <script>
-  import HelloWorld from '../components/HelloWorld'
+  import Listar from '../components/Listar.vue'
 
   export default {
     name: 'Home',
 
     components: {
-      HelloWorld,
+      Listar,
     },
   }
 </script>
