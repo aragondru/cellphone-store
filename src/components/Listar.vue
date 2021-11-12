@@ -4,13 +4,18 @@
         <ul>
             <li v-for="(cell,key) in cellphone" :key="key">{{cell.marca}}</li>
         </ul>
+
+        <strong>Agregar nuevo document a cellphone</strong>
+        <agregar></agregar>
     </div>
 </template>
 
 <script>
 import {db} from '../db'
+import Agregar from './Agregar.vue'
     export default {
         name: 'Listar',
+        components:{Agregar},
         data() {
             return {
                 cellphone:[],
