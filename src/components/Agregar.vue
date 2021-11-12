@@ -5,11 +5,7 @@
             <v-text-field label="Modelo" hide-details="auto" v-model="modelo"></v-text-field>
             <v-text-field label="Precio" hide-details="auto" v-model="precio"></v-text-field>
         
-            <v-btn
-            depressed
-            color="primary"
-            @click="insert"
-            >
+            <v-btn depressed color="primary" @click="insert">
             Enviar
             </v-btn>
         </v-form>
