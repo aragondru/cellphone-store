@@ -1,5 +1,5 @@
 <template>
-  <listar />
+  <listar/>
 </template>
 
 <script>

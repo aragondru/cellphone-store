@@ -10,11 +10,14 @@
                     </v-icon>
                     Eliminar
                 </v-btn>
+                <v-btn color="warning" small><v-icon left>mdi-pencil</v-icon>Edit</v-btn>
                 </li>
         </ul>
 
         <strong>Agregar nuevo document a cellphone</strong>
         <agregar></agregar>
+        <br>
+        <br>
     </div>
 </template>
 
