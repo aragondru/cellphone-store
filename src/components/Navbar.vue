@@ -14,6 +14,7 @@
           prepend-icon="mdi-magnify"
           single-line
         ></v-text-field>
+        <v-spacer></v-spacer>
         <v-toolbar-items>
             <v-btn
             text
@@ -33,6 +34,7 @@
           small
           fab
           style="background-color:#102b50;"
+          @click="emitVisible"
           >
             <v-icon>mdi-plus</v-icon>
           </v-btn>
@@ -45,6 +47,7 @@
 </template>
 
 <script>
+import {eventBus} from '../main'
     export default {
         name:'Navbar',
         data() {
@@ -55,8 +58,16 @@
                 ],
           }
         },
+        methods: {
+         emitVisible() {
+           eventBus.$emit('showModal',true)
+         }
+        },
     }
 </script>
 
-<style lang="css" scoped>
+<style>
+.n{
+background-color:#5a83c5;
+}
 </style>

@@ -1,6 +1,7 @@
 <template>
         <v-navigation-drawer
         v-model="drawer"
+        :mini-variant.sync="mini"
         style="overflow-y: auto;"
         permanent
         class="d-none d-sm-flex d-sm-none d-md-flex"
@@ -14,7 +15,7 @@
 
                 <v-btn
                 icon
-                
+                @click.stop="mini = !mini"
                 >
                     <v-icon>mdi-chevron-left</v-icon>
                 </v-btn>
@@ -22,21 +23,20 @@
 
             <v-divider></v-divider>
 
-            <v-list dense>
-                <v-list-item
-                v-for="item in items"
-                :key="item.title"
-                link
-                >
-                    <v-list-item-icon>
-                        <v-icon>{{ item.icon }}</v-icon>
-                    </v-list-item-icon>
-
-                    <v-list-item-content>
-                        <v-list-item-title>{{ item.title }}</v-list-item-title>
-                    </v-list-item-content>
-                </v-list-item>
-            </v-list>
+            <v-expansion-panels>
+                <v-expansion-panel>
+                <v-expansion-panel-header>
+                    Marcas
+                </v-expansion-panel-header>
+                <v-expansion-panel-content v-for="(i,key) in marcas" :key="key">
+                    <v-checkbox
+                    label="i.title"
+                    color="info"
+                    hide-details
+                    ></v-checkbox>
+                </v-expansion-panel-content>
+                </v-expansion-panel>
+            </v-expansion-panels>
         </v-navigation-drawer>
 </template>
 
@@ -46,12 +46,24 @@
         data () {
             return {
                 drawer: true,
-                items: [
-                    { title: 'Home', icon: 'mdi-home-city' },
-                    { title: 'My Account', icon: 'mdi-account' },
-                    { title: 'Users', icon: 'mdi-account-group-outline' },
+                marcas: [
+                    { title: 'Xiaomi'},
+                    { title: 'Samsung'},
+                    { title: 'Iphone'},
+                    {title: 'Huawei'},
+                    {title:'LG'}
                 ],
-                mini: true,
+                system:[
+                    {title:'Android'},
+                    {title:'IOS'},
+                    {title:'Windows phone'},
+                ],
+                screen:[
+                    {tamanio:5.0},
+                    {tamanio:6.0}
+                ],
+
+                mini: false,
             }
         },
     }

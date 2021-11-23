@@ -1,5 +1,5 @@
 <template>
-    <v-row no-gutters>
+    <v-row no-gutters style="margin-top:10px;">
         <v-col cols="12" sm="6">
             <curvas></curvas>
         </v-col>

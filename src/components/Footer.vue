@@ -27,7 +27,7 @@
         </v-btn>
       </v-card-title>
 
-      <v-card-text class="py-2 white--text text-center" style="background-color:#102b50;">
+      <v-card-text class="py-2 white--text text-center" style="background-color:#183052;">
         {{ new Date().getFullYear() }} — <strong>Cellphone Store</strong>
       </v-card-text>
     </v-card>
@@ -48,5 +48,7 @@
 </script>
 
 <style lang="scss" scoped>
-
+.nose{
+  background-color:#183052;
+}
 </style>
