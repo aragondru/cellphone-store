@@ -68,6 +68,6 @@ import {eventBus} from '../main'
 
 <style>
 .n{
-background-color:#5a83c5;
+background-color:#2b456e;
 }
 </style>

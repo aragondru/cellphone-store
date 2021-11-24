@@ -28,7 +28,7 @@
       </v-card-title>
 
       <v-card-text class="py-2 white--text text-center" style="background-color:#183052;">
-        {{ new Date().getFullYear() }} — <strong>Cellphone Store</strong>
+        {{ new Date().getFullYear() }} — <strong>Alejandro José Aragón Rugamas</strong>
       </v-card-text>
     </v-card>
   </v-footer>
