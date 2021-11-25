@@ -7,11 +7,15 @@
         class="d-none d-sm-flex d-sm-none d-md-flex"
         >
             <v-list-item class="px-2">
-                <v-list-item-avatar>
-                    <v-img src="https://randomuser.me/api/portraits/men/85.jpg"></v-img>
-                </v-list-item-avatar>
 
-                <v-list-item-title>John Leider</v-list-item-title>
+                <v-list-item>
+                    <v-switch
+                    label="Nuevo"
+                    color="primary"
+                    value="primary"
+                    hide-details
+                    ></v-switch>
+                </v-list-item>
 
                 <v-btn
                 icon
@@ -30,8 +34,37 @@
                 </v-expansion-panel-header>
                 <v-expansion-panel-content v-for="(i,key) in marcas" :key="key">
                     <v-checkbox
-                    label="i.title"
+                    :label="`${i.marca}`"
                     color="info"
+                    hide-details
+                    ></v-checkbox>
+                </v-expansion-panel-content>
+                </v-expansion-panel>
+            </v-expansion-panels>
+            <v-expansion-panels>
+                <v-expansion-panel>
+                <v-expansion-panel-header>
+                    Sistema
+                </v-expansion-panel-header>
+                <v-expansion-panel-content v-for="(i,key) in system" :key="key">
+                    <v-checkbox
+                    :label="`${i}`"
+                    color="info"
+                    hide-details
+                    ></v-checkbox>
+                </v-expansion-panel-content>
+                </v-expansion-panel>
+            </v-expansion-panels>
+            <v-expansion-panels>
+                <v-expansion-panel>
+                <v-expansion-panel-header>
+                    Pantalla
+                </v-expansion-panel-header>
+                <v-expansion-panel-content v-for="(i,key) in screen" :key="key">
+                    <v-checkbox
+                    :label="`${i}`"
+                    color="info"
+                    :value="`${i}`"
                     hide-details
                     ></v-checkbox>
                 </v-expansion-panel-content>
@@ -41,30 +74,21 @@
 </template>
 
 <script>
+import {db} from '../../db'
     export default {
         name:'Filtro',
         data () {
             return {
                 drawer: true,
-                marcas: [
-                    { title: 'Xiaomi'},
-                    { title: 'Samsung'},
-                    { title: 'Iphone'},
-                    {title: 'Huawei'},
-                    {title:'LG'}
-                ],
-                system:[
-                    {title:'Android'},
-                    {title:'IOS'},
-                    {title:'Windows phone'},
-                ],
-                screen:[
-                    {tamanio:5.0},
-                    {tamanio:6.0}
-                ],
+                marcas: [],
+                system:["Android","IOS","Windows","Otro"],
+                screen:[7,6,5],
 
                 mini: false,
             }
+        },
+        firestore:{
+            marcas: db.collection('marca')
         },
     }
 </script>
