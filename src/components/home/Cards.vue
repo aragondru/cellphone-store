@@ -29,18 +29,21 @@
 
       <v-card-actions>
         <v-btn
-          color="orange"
+          color="red"
           text
+          fab
         >
-          Share
+          <v-icon>mdi-cart</v-icon>
         </v-btn>
-
-        <v-btn
-          color="orange"
-          text
-        >
-          Explore
-        </v-btn>
+        <router-link class="mr-2" :to="`/post/${anuncio.id}`">
+          <v-btn
+            color="orange"
+            text
+            @click="mandarAnuncio(anuncio)"
+          >
+            Ver más
+          </v-btn>
+        </router-link>
       </v-card-actions>
     </v-card>
   </v-col>
@@ -117,6 +120,10 @@ import { eventBus } from '../../main';
           a.sistema==cadena || a.titulo==cadena
           )
 
+        },
+        mandarAnuncio(objeto){
+          console.log("Que devuelves? "+objeto.titulo);
+          eventBus.$emit('anuncioM', objeto)
         }
     },
     mounted(){

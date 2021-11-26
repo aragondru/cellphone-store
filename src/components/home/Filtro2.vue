@@ -1,46 +1,15 @@
 <template>
     <div style="margin-left:15px; margin-top:15px;">
-        Ordenar por precio:
+        
         <v-row>
             <v-col
                 cols="12"
                 sm="6"
             >
-            <v-row>
-                <v-col
-                cols="5"
-                sm="2"
-                md="4"
-                >
-                    <v-text-field
-                        label="Desde"
-                        placeholder="Desde"
-                        outlined
-                        type="number"
-                        step="0.01"
-                    ></v-text-field>
-                </v-col>
-                <v-col
-                    cols="5"
-                    sm="2"
-                    md="4"
-                >
-                    <v-text-field
-                        label="Hasta"
-                        placeholder="Hasta"
-                        outlined
-                        type="number"
-                        step="0.01"
-                    ></v-text-field>
-                </v-col>
-                <v-col
-                    cols="2"
-                    sm="2"
-                >
+                <div>
                     <v-btn
                         color="success"
-                        fab
-                        
+                        small                        
                         @click="ordenarPrecio"
                     >
                         <v-icon left v-if="ascPrecio">
@@ -49,19 +18,18 @@
                         <v-icon left v-else>
                             mdi-arrow-down
                         </v-icon>
+                        Ordenar por precio
                     </v-btn>
-                </v-col>
-            </v-row>
+                </div>
             </v-col>
             <v-col
                 cols="12"       
                 sm="6"
             >
             <div >
-                Ordenar por Fecha:
                 <v-btn
                         color="success"
-                        fab
+                        small
                         @click="ordenarFecha"
                     >
                         <v-icon left v-if="ascFecha">
@@ -70,6 +38,7 @@
                         <v-icon left v-else>
                             mdi-arrow-down
                         </v-icon>
+                        Ordenar po fecha
                     </v-btn>
             </div>
             </v-col>

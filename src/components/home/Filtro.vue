@@ -35,7 +35,7 @@
                 <v-expansion-panel-content v-for="(i,key) in marcas" :key="key">
                     <v-checkbox
                     :label="`${i.marca}`"
-                    :value="`${i.id}`"
+                    :value="`${i.marca}`"
                     color="info"
                     hide-details
                     v-model="filtros"

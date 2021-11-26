@@ -3,7 +3,7 @@
         <v-app-bar app flat fixed dark style="background-color: #001526;">
           <v-app-bar-nav-icon class="d-flex d-sm-none"></v-app-bar-nav-icon>
 
-          <v-toolbar-title class="d-none d-sm-flex" style="cursor:pointer;">
+          <v-toolbar-title class="d-none d-sm-flex" style="cursor:pointer;" :to="`/`">
             <v-icon>mdi-bullhorn</v-icon>
             Tienda Cellphone
           </v-toolbar-title>
@@ -26,8 +26,7 @@
           <v-toolbar-items>
               <v-btn
               text
-              class="text-capitalize mr-2 "
-              v-show="$vuetify.breakpoint.lgOnly"
+              class="text-capitalize mr-2 d-none d-sm-flex"
               v-for="(item,key) in menuItems"
               :key="key"
               :to="item.to"

@@ -8,6 +8,10 @@
             <filtro2></filtro2>
 
             <cards id="cards"></cards>
+            <br>
+            <br>
+            <br>
+            <pagination></pagination>
       </v-col>
     </v-row>
     
@@ -19,6 +23,7 @@
   import Filtro from '../components/home/Filtro.vue'
   import Cards from '../components/home/Cards.vue'
   import Filtro2 from '../components/home/Filtro2.vue'
+  import Pagination from '../components/home/Pagination.vue'
 
   export default {
     name: 'Home',
@@ -27,7 +32,8 @@
      // Listar,
       Filtro,
       Cards,
-      Filtro2
+      Filtro2,
+      Pagination,
     },
   }
 </script>

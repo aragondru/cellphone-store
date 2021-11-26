@@ -46,7 +46,7 @@
               <v-select
                 :items="marcas"
                 item-text="marca"
-                item-value="id"
+                item-value="marca"
                 label="Marca"
                 v-model="idMarca"
                 outlined
@@ -54,7 +54,7 @@
               <v-select
                 :items="modelos"
                 item-text="nombre"
-                item-value="id"
+                item-value="nombre"
                 label="Modelo"
                 v-model="id_modelo"
                 outlined
