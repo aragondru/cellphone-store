@@ -35,5 +35,6 @@
   #cards{
     margin-top: 15px;
     margin-left: 7px; 
+    float: left;
   }
 </style>

@@ -7,24 +7,41 @@
     :key="key"
   >
     <v-card
-    max-width="344"
-    
-    style="cursor: pointer;"
-    color="grey lighten-1"
-  >
-    <v-img
-      :src="`${anuncio.foto}`"
-      height="200px"
-    ></v-img>
+      class="mx-auto"
+      max-width="400"
+      :elevation="20"
+    >
+      <v-img
+        class="dark--text align-end"
+        height="200px"
+        :src="`${anuncio.foto}`"
+      >
+        <v-card-title></v-card-title>
+      </v-img>
 
-    <v-card-title>
-      {{anuncio.titulo}}
-    </v-card-title>
+      <v-card-subtitle class="pb-0">
+        <strong>{{anuncio.titulo}}</strong>
+      </v-card-subtitle>
 
-    <v-card-subtitle>
-      <strong>Precio: ${{anuncio.precio}}</strong>
-    </v-card-subtitle>
+      <v-card-text class="text--primary">
+        <div><strong>${{anuncio.precio}}</strong> </div>
+      </v-card-text>
 
+      <v-card-actions>
+        <v-btn
+          color="orange"
+          text
+        >
+          Share
+        </v-btn>
+
+        <v-btn
+          color="orange"
+          text
+        >
+          Explore
+        </v-btn>
+      </v-card-actions>
     </v-card>
   </v-col>
 </v-row>
@@ -94,6 +111,13 @@ import { eventBus } from '../../main';
             return retorno;
           })
         },
+        buscar(cadena){
+          this.filtro=this.anuncios
+          this.filtro=this.anuncios.filter((a)=>
+          a.sistema==cadena || a.titulo==cadena
+          )
+
+        }
     },
     mounted(){
         this.filtro=this.anuncios
@@ -107,6 +131,9 @@ import { eventBus } from '../../main';
 
         eventBus.$on('ordenarP',(ascPrecio)=>{
           this.ordenarPrecio(ascPrecio)
+        })
+        eventBus.$on('buscar',(data)=>{
+          this.buscar(data)
         })
     },
   }
