@@ -35,8 +35,11 @@
                 <v-expansion-panel-content v-for="(i,key) in marcas" :key="key">
                     <v-checkbox
                     :label="`${i.marca}`"
+                    :value="`${i.id}`"
                     color="info"
                     hide-details
+                    v-model="filtros"
+                    @change="filtrosL"
                     ></v-checkbox>
                 </v-expansion-panel-content>
                 </v-expansion-panel>
@@ -49,8 +52,11 @@
                 <v-expansion-panel-content v-for="(i,key) in system" :key="key">
                     <v-checkbox
                     :label="`${i}`"
+                    :value="`${i}`"
                     color="info"
                     hide-details
+                    v-model="filtros"
+                    @change="filtrosL"
                     ></v-checkbox>
                 </v-expansion-panel-content>
                 </v-expansion-panel>
@@ -66,6 +72,8 @@
                     color="info"
                     :value="`${i}`"
                     hide-details
+                    v-model="filtros"
+                    @change="filtrosL"
                     ></v-checkbox>
                 </v-expansion-panel-content>
                 </v-expansion-panel>
@@ -75,15 +83,30 @@
 
 <script>
 import {db} from '../../db'
+import { eventBus } from '../../main'
+//import{eventBus} from '../../main'
     export default {
         name:'Filtro',
+        methods: {
+          filtrosL()  {
+              if(this.filtros.length>0){
+                for (let index = 0; index < this.filtros.length; index++) {
+                    console.log(this.filtros[index]);
+                    
+                }
+                eventBus.$emit('filtrosL',this.filtros)
+              }else{
+                  eventBus.$emit('filtrosL','')
+              }
+          }
+        },
         data () {
             return {
                 drawer: true,
                 marcas: [],
-                system:["Android","IOS","Windows","Otro"],
+                system:["Android","IOs","Windows","Otro"],
                 screen:[7,6,5],
-
+                filtros:[],
                 mini: false,
             }
         },

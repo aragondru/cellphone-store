@@ -4,17 +4,10 @@
       <v-col cols="12" sm="2">
         <filtro></filtro>
       </v-col>
-      <v-col cols="12" sm="9">
-        <v-row>
-          <v-col cols="12" sm="12">
-            <h1>Filtros</h1>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="12" sm="12">
+      <v-col cols="12" sm="10">
+            <filtro2></filtro2>
+
             <cards id="cards"></cards>
-          </v-col>
-        </v-row>
       </v-col>
     </v-row>
     
@@ -25,6 +18,7 @@
   //import Listar from '../components/Listar.vue'
   import Filtro from '../components/home/Filtro.vue'
   import Cards from '../components/home/Cards.vue'
+  import Filtro2 from '../components/home/Filtro2.vue'
 
   export default {
     name: 'Home',
@@ -33,13 +27,13 @@
      // Listar,
       Filtro,
       Cards,
+      Filtro2
     },
   }
 </script>
 <style >
   #cards{
     margin-top: 15px;
-    margin-left: 7px;
-    float: left;
+    margin-left: 7px; 
   }
 </style>

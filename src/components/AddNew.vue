@@ -230,12 +230,13 @@ import {db,storage} from '../db'
           this.fotoUrl='';
           this.files=null,
           this.filename=''
+          this.idMarca=''
 
         },
         guardar(){
           var anuncioNew={
               id_modelo:  this.id_modelo,
-              pantalla:   parseFloat(this.pantalla),
+              pantalla:   this.pantalla,
               estado:     this.estado,
               precio:     Number(this.precio),
               ram:        parseFloat(this.ram),
@@ -246,7 +247,8 @@ import {db,storage} from '../db'
               titulo:     this.titulo,
               descripcion:this.descripcion,
               fecha: new Date(Date.now()),
-              foto:       this.fotoUrl
+              foto:       this.fotoUrl,
+              id_marca:   this.idMarca,
           }
           db.collection('anuncio').add(anuncioNew)
           this.dialog=false;
@@ -266,6 +268,7 @@ import {db,storage} from '../db'
           this.files=null,
           this.filename=''
           this.step=1
+          this.id_marca=''
         },
         subir(){
           console.log("Subiendo imagen");

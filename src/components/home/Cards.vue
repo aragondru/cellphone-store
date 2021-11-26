@@ -1,15 +1,20 @@
 <template>
-<v-app>
+<v-row>
+  <v-col 
+    cols="12" 
+    sm="3" 
+    v-for="(anuncio,key) in filtro"
+    :key="key"
+  >
     <v-card
     max-width="344"
-    v-for="(anuncio,key) in anuncios"
-    :key="key"
-    dark
+    
+    style="cursor: pointer;"
+    color="grey lighten-1"
   >
     <v-img
       :src="`${anuncio.foto}`"
       height="200px"
-      width="300px"
     ></v-img>
 
     <v-card-title>
@@ -20,47 +25,89 @@
       <strong>Precio: ${{anuncio.precio}}</strong>
     </v-card-subtitle>
 
-    <v-card-actions>
-      <v-btn
-        color="orange lighten-2"
-        text
-      >
-        Explore
-      </v-btn>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        icon
-        @click="show = !show"
-      >
-        <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
-      </v-btn>
-    </v-card-actions>
-
-    <v-expand-transition>
-      <div v-show="show">
-        <v-divider></v-divider>
-
-        <v-card-text>
-          {{anuncio.descripcion}}
-        </v-card-text>
-      </div>
-    </v-expand-transition>
-  </v-card>
-</v-app>
+    </v-card>
+  </v-col>
+</v-row>
   
 </template>
 <script>
 import {db} from '../../db'
+import { eventBus } from '../../main';
   export default {
       name:'Cards',
     data: () => ({
       show: false,
       anuncios:[],
+      filtro:[],
+      filterList:[]
     }),
     firestore:{
         anuncios:db.collection('anuncio')
-    }
+    },
+    methods: {
+        filtrar(cadena){
+            this.filtro=this.anuncios
+            if(cadena){
+                this.filterList=[];
+                let listTemp=[];
+                for (let i = 0; i < cadena.length; i++) {
+                    this.filtro=this.anuncios.filter((a)=> a.id_marca==cadena[i])
+
+                    listTemp = this.filterList.concat(this.filtro);
+                    this.filterList=listTemp;
+                    this.filtro=this.anuncios.filter((a)=> a.sistema==cadena[i])
+
+                    listTemp=this.filterList.concat(this.filtro);
+                    this.filterList=listTemp;
+                    this.filtro=this.anuncios.filter((a)=> a.pantalla==cadena[i])
+                    listTemp=this.filterList.concat(this.filtro);
+                    this.filterList=listTemp;                    
+                }
+
+                this.filtro = this.filterList
+            }
+
+        },
+        ordenarFecha(ascFecha){
+          this.filtro.sort((a,b)=>{
+            var retorno=1;
+            if (a.fecha>b.fecha)
+              retorno=1
+            else if(a.fecha<b.fecha)
+                  retorno=-1
+            if(!ascFecha)
+              retorno=retorno*-1
+            
+            return retorno;
+          })
+        },
+        ordenarPrecio(ascPrecio){
+          this.filtro.sort((a,b)=>{
+            var retorno=1;
+            if (a.precio>b.precio)
+              retorno=1
+            else if(a.precio<b.precio)
+                  retorno=-1
+            if(!ascPrecio)
+              retorno=retorno*-1
+            
+            return retorno;
+          })
+        },
+    },
+    mounted(){
+        this.filtro=this.anuncios
+        eventBus.$on('filtrosL',(data)=>{
+            this.filtrar(data)
+        })
+
+        eventBus.$on('ordenarF',(ascFecha)=>{
+          this.ordenarFecha(ascFecha)
+        })
+
+        eventBus.$on('ordenarP',(ascPrecio)=>{
+          this.ordenarPrecio(ascPrecio)
+        })
+    },
   }
 </script>
