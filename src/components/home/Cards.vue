@@ -59,7 +59,7 @@ import { eventBus } from '../../main';
       show: false,
       anuncios:[],
       filtro:[],
-      filterList:[]
+      filterList:[],
     }),
     firestore:{
         anuncios:db.collection('anuncio')
@@ -71,15 +71,15 @@ import { eventBus } from '../../main';
                 this.filterList=[];
                 let listTemp=[];
                 for (let i = 0; i < cadena.length; i++) {
-                    this.filtro=this.anuncios.filter((a)=> a.id_marca==cadena[i])
+                    this.filtro=this.anuncios.filter((a)=> a.titulo.toLowerCase()==cadena[i].toLowerCase())
 
                     listTemp = this.filterList.concat(this.filtro);
                     this.filterList=listTemp;
-                    this.filtro=this.anuncios.filter((a)=> a.sistema==cadena[i])
+                    this.filtro=this.anuncios.filter((a)=> a.sistema.toLowerCase() ==cadena[i].toLowerCase())
 
                     listTemp=this.filterList.concat(this.filtro);
                     this.filterList=listTemp;
-                    this.filtro=this.anuncios.filter((a)=> a.pantalla==cadena[i])
+                    this.filtro=this.anuncios.filter((a)=> a.pantalla.toLowerCase()==cadena[i].toLowerCase())
                     listTemp=this.filterList.concat(this.filtro);
                     this.filterList=listTemp;                    
                 }
