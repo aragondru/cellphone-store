@@ -71,15 +71,15 @@ import { eventBus } from '../../main';
                 this.filterList=[];
                 let listTemp=[];
                 for (let i = 0; i < cadena.length; i++) {
-                    this.filtro=this.anuncios.filter((a)=> a.titulo.toLowerCase()==cadena[i].toLowerCase())
+                    this.filtro=this.anuncios.filter((a)=> a.id_marca==cadena[i])
 
                     listTemp = this.filterList.concat(this.filtro);
                     this.filterList=listTemp;
-                    this.filtro=this.anuncios.filter((a)=> a.sistema.toLowerCase() ==cadena[i].toLowerCase())
+                    this.filtro=this.anuncios.filter((a)=> a.sistema ==cadena[i])
 
                     listTemp=this.filterList.concat(this.filtro);
                     this.filterList=listTemp;
-                    this.filtro=this.anuncios.filter((a)=> a.pantalla.toLowerCase()==cadena[i].toLowerCase())
+                    this.filtro=this.anuncios.filter((a)=> a.pantalla==cadena[i])
                     listTemp=this.filterList.concat(this.filtro);
                     this.filterList=listTemp;                    
                 }
@@ -117,7 +117,7 @@ import { eventBus } from '../../main';
         buscar(cadena){
           this.filtro=this.anuncios
           this.filtro=this.anuncios.filter((a)=>
-          a.sistema==cadena || a.titulo==cadena
+          a.sistema==cadena || a.titulo==cadena ||a.id_marca==cadena || a.id_modelo
           )
 
         },

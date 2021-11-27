@@ -43,22 +43,51 @@
                 label="Titulo del anuncio"
                 v-model="titulo"
               ></v-text-field>
-              <v-select
-                :items="marcas"
-                item-text="marca"
-                item-value="marca"
-                label="Marca"
-                v-model="idMarca"
-                outlined
-              ></v-select>
-              <v-select
-                :items="modelos"
-                item-text="nombre"
-                item-value="nombre"
-                label="Modelo"
-                v-model="id_modelo"
-                outlined
-              ></v-select>
+              <v-row>
+                <v-col cols="6" sm="5">
+                  <v-select
+                    :items="marcas"
+                    item-text="marca"
+                    item-value="marca"
+                    label="Marca"
+                    v-model="idMarca"
+                    outlined
+                    @click="newMarca==true"
+                  ></v-select>
+                </v-col>
+                <v-col cols="4" sm="3">
+                  <v-btn
+                    text
+                    color="blue-grey"
+                    outlined
+                    @click="dialogMa=true"
+                  >
+                    Nueva marca
+                  </v-btn>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="6" sm="5">
+                  <v-select
+                    :items="modelos"
+                    item-text="nombre"
+                    item-value="nombre"
+                    label="Modelo"
+                    v-model="id_modelo"
+                    outlined
+                  ></v-select>
+                </v-col>
+                <v-col cols="4" sm="3">
+                  <v-btn
+                    text
+                    color="blue-grey"
+                    outlined
+                    @click="dialogMo=true"
+                  >
+                    Nuevo Modelo
+                  </v-btn>
+                </v-col>
+              </v-row>
               <v-select
                 :items="sistemaL"
                 label="Sistema operativo"
@@ -177,6 +206,94 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <div class="text-center">
+      <v-dialog
+        v-model="dialogMa"
+        persistent
+        width="500"
+      >
+
+        <v-card>
+          <v-card-title class="text-h5 grey lighten-2">
+            Nueva Marca
+          </v-card-title>
+
+          <v-divider></v-divider>
+          <v-container >
+            <v-text-field
+              label="Nueva marca"
+              v-model="newMarca"
+            ></v-text-field>
+          </v-container>
+
+          <v-card-actions>
+            <v-btn
+              color="primary"
+              text
+              @click="dialogMa = false"
+            >
+              Cancel
+            </v-btn>
+            <v-spacer></v-spacer>
+            <v-btn
+              color="success"
+              text
+              @click="nuevamarca"
+            >
+              Guardar
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </div>
+    <div class="text-center">
+      <v-dialog
+        v-model="dialogMo"
+        persistent
+        width="500"
+      >
+
+        <v-card>
+          <v-card-title class="text-h5 grey lighten-2">
+            Nueva Modelo
+          </v-card-title>
+
+          <v-divider></v-divider>
+          <v-container >
+            <v-text-field
+              label="Nuevo modelo"
+              v-model="newModelo"
+            ></v-text-field>
+            <v-select
+                    :items="marcas"
+                    item-text="marca"
+                    item-value="id"
+                    label="Marca"
+                    v-model="idNuevaMarca"
+                    outlined
+                  ></v-select>
+          </v-container>
+
+          <v-card-actions>
+            <v-btn
+              color="primary"
+              text
+              @click="dialogMo = false"
+            >
+              Cancel
+            </v-btn>
+            <v-spacer></v-spacer>
+            <v-btn
+              color="success"
+              text
+              @click="nuevomodelo"
+            >
+              Guardar
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </div>
   </div>
 </template>
 
@@ -187,7 +304,12 @@ import {db,storage} from '../db'
     name:'AddNew',
     data () {
       return {
+        newMarca:'',
+        newModelo:'',
+        idNuevaMarca:'',
         dialog: false,
+        dialogMa:false,
+        dialogMo:false,
         step:1,
         vendedor:"",
         telefono:"",
@@ -209,7 +331,7 @@ import {db,storage} from '../db'
         filename:'',
         fotoUrl:'',
         anuncios:[],
-        upload:false
+        upload:false,
       }
     },
     methods: {
@@ -286,7 +408,27 @@ import {db,storage} from '../db'
           }).catch((error)=>{
             console.log(error);
           })
+        },
+        nuevamarca(){
+          this.dialogMa=!this.dialogMa;
+          var marca = {
+            marca:this.newMarca
+          }
+          db.collection('marca').add(marca)
+          this.newMarca=''
+
+        },
+        nuevomodelo(){
+          this.dialogMo= !this.dialogMo
+
+          var modelo = {
+            nombre: this.newModelo,
+            id_marca: this.idNuevaMarca,
+          }
+
+          db.collection('modelo').add(modelo)
         }
+
     },
     mounted(){
         eventBus.$on('showModal',(data)=>{
@@ -313,8 +455,66 @@ import {db,storage} from '../db'
   }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .nose{
   background-color:#3d587e;
+}
+.custom-select {
+  position: relative;
+  font-family: Arial;
+}
+
+.custom-select select {
+  display: none; /*hide original SELECT element: */
+}
+
+.select-selected {
+  background-color: DodgerBlue;
+}
+
+/* Style the arrow inside the select element: */
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+/* Point the arrow upwards when the select box is open (active): */
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: 7px;
+}
+
+/* style the items (options), including the selected item: */
+.select-items div,.select-selected {
+  color: #ffffff;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+}
+
+/* Style items (options): */
+.select-items {
+  position: absolute;
+  background-color: DodgerBlue;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+
+/* Hide the items when the select box is closed: */
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 </style>

@@ -63,7 +63,7 @@
                 
               </v-card-title>
               <v-list>
-                <v-list-item-group v-model="model">
+                <v-list-item-group>
                   <v-list-item
                     v-for="(item, i) in menuItems"
                     :key="i"
@@ -72,7 +72,6 @@
                       <v-icon v-text="item.icon"></v-icon>
                     </v-list-item-icon>
                     <v-list-item-content>
-                      <router-link></router-link>
                       <v-list-item-title @click="dialog=false" >
                         <v-btn
                           text
